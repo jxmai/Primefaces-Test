@@ -12,5 +12,32 @@
         
         <h1>#{testView.testString}</h1>
         
+        <h:form>
+        	<p:accordionPanel>
+        		<p:tab title="Tab 1">
+        			<p:dataList value="#{testView.testStrings}"
+        						var="t"
+        			>
+        				<f:facet name="header">
+        					Data List
+        				</f:facet>
+        				
+        				<p:outputLabel value="#{t}">
+        				
+        				</p:outputLabel>
+        				
+        				<p:spacer width="10"></p:spacer>
+        				
+        				<p:commandButton value="Fire" actionListener="#{testView.fireActionListener(t)}"></p:commandButton>
+        			
+        			</p:dataList>
+        		</p:tab>
+        		
+        		<p:tab title="Tab 2">
+        			
+        		</p:tab>
+        	</p:accordionPanel>
+        </h:form>
+        
     </h:body>
 </html>
