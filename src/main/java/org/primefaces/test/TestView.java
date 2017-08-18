@@ -8,19 +8,21 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean(name = "testView")
 @ViewScoped
 public class TestView implements Serializable {
-    
-    private String testString;
-    
-    @PostConstruct  
-    public void init() {
-        testString = "Welcome to PrimeFaces!!!";
-    }
 
-    public String getTestString() {
-        return testString;
-    }
+	private static final long serialVersionUID = 4124891683211838799L;
 
-    public void setTestString(String testString) {
-        this.testString = testString;
-    }    
+	private String testString;
+
+	@PostConstruct
+	public void init() {
+		testString = "Welcome to PrimeFaces!!!";
+	}
+
+	public String getTestString() {
+		return testString;
+	}
+
+	public void setTestString(String testString) {
+		this.testString = testString;
+	}
 }
