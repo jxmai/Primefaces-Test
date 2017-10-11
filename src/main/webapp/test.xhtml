@@ -12,5 +12,18 @@
         
         <h1>#{testView.testString}</h1>
         
+        <h:form id="testForm">
+        	<p:commandButton update="@form" value="Click me first"></p:commandButton>
+        	<p:accordionPanel>
+        		<p:tab title="Tab1">
+        			<p:textEditor></p:textEditor>
+        		</p:tab>
+        		<p:tab title="Tab2">
+        			<p:textEditor></p:textEditor>
+        		</p:tab>
+        	</p:accordionPanel>
+        </h:form>
+        
+        
     </h:body>
 </html>
