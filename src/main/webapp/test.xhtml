@@ -12,5 +12,55 @@
         
         <h1>#{testView.testString}</h1>
         
+        <h:form>
+	        <p:dataTable value="#{testView.people}" 
+	        			var="person"
+	        			editable="true"
+	        			editMode="cell"
+	        			>
+	            <p:column headerText="Id">
+	        		<p:cellEditor>
+	        			<f:facet name="input">
+		        			<p:inputText value="#{person.id}"></p:inputText>
+	        			</f:facet>
+	        			<f:facet name="output">
+		        			<h:outputText value="#{person.id}" />
+	        			</f:facet>
+	        		</p:cellEditor>
+	        	</p:column>
+	        	<p:column headerText="Active">
+	        		<p:selectBooleanCheckbox value="#{person.isActive}">
+	        		
+	        		</p:selectBooleanCheckbox>
+	        	</p:column>
+	        	
+	        	<p:column headerText="Name">
+	        		<p:cellEditor>
+	        			<f:facet name="input">
+		        			<p:inputText value="#{person.name}"></p:inputText>
+	        			</f:facet>
+	        			<f:facet name="output">
+		        			<h:outputText value="#{person.name}" />
+	        			</f:facet>
+	        		</p:cellEditor>
+	        	</p:column>
+	        	
+	        	<p:column headerText="Description">
+	        		<p:cellEditor>
+	        			<f:facet name="input">
+		        			<p:inputText value="#{person.description}"></p:inputText>
+	        			</f:facet>
+	        			<f:facet name="output">
+		        			<h:outputText value="#{person.description}" />
+	        			</f:facet>
+	        		</p:cellEditor>
+	        	</p:column>
+	        	
+	        	<!-- <p:column headerText="Id">
+			        <h:outputText value="#{person.id}" />
+			    </p:column> -->
+	        </p:dataTable>
+        </h:form>
+       
     </h:body>
 </html>
