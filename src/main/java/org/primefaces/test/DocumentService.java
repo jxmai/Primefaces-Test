@@ -1,5 +1,7 @@
 package org.primefaces.test;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
@@ -8,41 +10,57 @@ import org.primefaces.model.TreeNode;
 
 @ManagedBean(name = "treeTableDocumentService")
 @ApplicationScoped
-public class DocumentService {
+public class DocumentService implements Serializable {
 
-	public TreeNode createDocuments() {
-		TreeNode root = new DefaultTreeNode(new Document("Files", "-", "Folder"), null);
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 253610226984008825L;
 
-		TreeNode documents = new DefaultTreeNode(new Document("Documents", "-", "Folder"), root);
-		TreeNode pictures = new DefaultTreeNode(new Document("Pictures", "-", "Folder"), root);
-		TreeNode movies = new DefaultTreeNode(new Document("Movies", "-", "Folder"), root);
+    public TreeNode createDocuments() {
+        TreeNode root = new DefaultTreeNode(new Document("Files", "-", "Folder"), null);
 
-		TreeNode work = new DefaultTreeNode(new Document("Work", "-", "Folder"), documents);
-		TreeNode primefaces = new DefaultTreeNode(new Document("PrimeFaces", "-", "Folder"), documents);
+        TreeNode documents = new DefaultTreeNode(new Document("Documents", "-", "Folder"), root);
+        TreeNode pictures = new DefaultTreeNode(new Document("Pictures", "-", "Folder"), root);
+        TreeNode movies = new DefaultTreeNode(new Document("Movies", "-", "Folder"), root);
 
-		// Documents
-		TreeNode expenses = new DefaultTreeNode("document", new Document("Expenses.doc", "30 KB", "Word Document"),
-				work);
-		TreeNode resume = new DefaultTreeNode("document", new Document("Resume.doc", "10 KB", "Word Document"), work);
-		TreeNode refdoc = new DefaultTreeNode("document", new Document("RefDoc.pages", "40 KB", "Pages Document"),
-				primefaces);
+        TreeNode work = new DefaultTreeNode(new Document("Work", "-", "Folder"), documents);
+        TreeNode primefaces = new DefaultTreeNode(new Document("PrimeFaces", "-", "Folder"),
+                documents);
 
-		// Pictures
-		TreeNode barca = new DefaultTreeNode("picture", new Document("barcelona.jpg", "30 KB", "JPEG Image"), pictures);
-		TreeNode primelogo = new DefaultTreeNode("picture", new Document("logo.jpg", "45 KB", "JPEG Image"), pictures);
-		TreeNode optimus = new DefaultTreeNode("picture", new Document("optimusprime.png", "96 KB", "PNG Image"),
-				pictures);
+        // Documents
+        TreeNode expenses = new DefaultTreeNode("document",
+                new Document("Expenses.doc", "30 KB", "Word Document"),
+                work);
+        TreeNode resume = new DefaultTreeNode("document",
+                new Document("Resume.doc", "10 KB", "Word Document"), work);
+        TreeNode refdoc = new DefaultTreeNode("document",
+                new Document("RefDoc.pages", "40 KB", "Pages Document"),
+                primefaces);
 
-		// Movies
-		TreeNode pacino = new DefaultTreeNode(new Document("Al Pacino", "-", "Folder"), movies);
-		TreeNode deniro = new DefaultTreeNode(new Document("Robert De Niro", "-", "Folder"), movies);
+        // Pictures
+        TreeNode barca = new DefaultTreeNode("picture",
+                new Document("barcelona.jpg", "30 KB", "JPEG Image"), pictures);
+        TreeNode primelogo = new DefaultTreeNode("picture",
+                new Document("logo.jpg", "45 KB", "JPEG Image"), pictures);
+        TreeNode optimus = new DefaultTreeNode("picture",
+                new Document("optimusprime.png", "96 KB", "PNG Image"),
+                pictures);
 
-		TreeNode scarface = new DefaultTreeNode("mp3", new Document("Scarface", "15 GB", "Movie File"), pacino);
-		TreeNode carlitosWay = new DefaultTreeNode("mp3", new Document("Carlitos' Way", "24 GB", "Movie File"), pacino);
+        // Movies
+        TreeNode pacino = new DefaultTreeNode(new Document("Al Pacino", "-", "Folder"), movies);
+        TreeNode deniro = new DefaultTreeNode(new Document("Robert De Niro", "-", "Folder"), movies);
 
-		TreeNode goodfellas = new DefaultTreeNode("mp3", new Document("Goodfellas", "23 GB", "Movie File"), deniro);
-		TreeNode untouchables = new DefaultTreeNode("mp3", new Document("Untouchables", "17 GB", "Movie File"), deniro);
+        TreeNode scarface = new DefaultTreeNode("mp3",
+                new Document("Scarface", "15 GB", "Movie File"), pacino);
+        TreeNode carlitosWay = new DefaultTreeNode("mp3",
+                new Document("Carlitos' Way", "24 GB", "Movie File"), pacino);
 
-		return root;
-	}
+        TreeNode goodfellas = new DefaultTreeNode("mp3",
+                new Document("Goodfellas", "23 GB", "Movie File"), deniro);
+        TreeNode untouchables = new DefaultTreeNode("mp3",
+                new Document("Untouchables", "17 GB", "Movie File"), deniro);
+
+        return root;
+    }
 }

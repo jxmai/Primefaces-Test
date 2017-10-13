@@ -28,30 +28,15 @@
 			<p:column headerText="Type">
 				<h:outputText value="#{document.type}" />
 			</p:column>
+			
+			<f:facet name="footer">
+				<p:commandButton value="Expand All" actionListener="#{treeTableBasicView.expandAll(treeTableBasicView.root)}" update="@form">
+				</p:commandButton>
+				<p:commandButton value="Collapse All" actionListener="#{treeTableBasicView.collapseAll(treeTableBasicView.root)}" update="@form">
+				</p:commandButton>
+			</f:facet>
 		</p:treeTable>
 
-		<p:dialog id="dialog" header="Document Detail" showEffect="fade"
-			widgetVar="documentDialog" modal="true" resizable="false">
-			<p:outputPanel id="documentPanel">
-				<p:panelGrid columns="2" columnClasses="label,value"
-					rendered="#{not empty treeTableBasicView.selectedDocument}">
-					<h:outputLabel for="name" value="Name: " />
-					<h:outputText id="name"
-						value="#{treeTableBasicView.selectedDocument.name}"
-						style="font-weight:bold" />
-
-					<h:outputLabel for="size" value="Size: " />
-					<h:outputText id="size"
-						value="#{treeTableBasicView.selectedDocument.size}"
-						style="font-weight:bold" />
-
-					<h:outputLabel for="type" value="Type " />
-					<h:outputText id="type"
-						value="#{treeTableBasicView.selectedDocument.type}"
-						style="font-weight:bold" />
-				</p:panelGrid>
-			</p:outputPanel>
-		</p:dialog>
 	</h:form>
 </h:body>
 
