@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-    <h:head>   
-        <title>PrimeFaces Test</title>
-    </h:head>
-    <h:body>
-        
-        <h1>#{testView.testString}</h1>
-        
-    </h:body>
+<h:head>
+	<title>PrimeFaces Test</title>
+</h:head>
+<h:body>
+
+	<h1>#{testView.testString}</h1>
+
+
+	<h:form>
+		<p:splitButton value="Long Long Long Long Long Long Long save"
+			icon="ui-icon-disk">
+			<p:menuitem value="Long long long long long long text"
+				icon="ui-icon-arrowrefresh-1-w" />
+		</p:splitButton>
+		
+		<p:splitButton value="Short"
+			icon="ui-icon-disk">
+			<p:menuitem value="Short"
+				icon="ui-icon-arrowrefresh-1-w" />
+		</p:splitButton>
+	</h:form>
+</h:body>
 </html>
