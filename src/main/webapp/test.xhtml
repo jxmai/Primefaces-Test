@@ -30,9 +30,9 @@
 			</p:column>
 			
 			<f:facet name="footer">
-				<p:commandButton value="Expand All" actionListener="#{treeTableBasicView.expandAll(treeTableBasicView.root)}" update="@form">
+				<p:commandButton value="Expand All" actionListener="#{treeTableBasicView.expandAll(empty treeTableBasicView.filteredNode ? treeTableBasicView.root : treeTableBasicView.filteredNode)}" update="@form">
 				</p:commandButton>
-				<p:commandButton value="Collapse All" actionListener="#{treeTableBasicView.collapseAll(treeTableBasicView.root)}" update="@form">
+				<p:commandButton value="Collapse All" actionListener="#{treeTableBasicView.collapseAll(empty treeTableBasicView.filteredNode ? treeTableBasicView.root : treeTableBasicView.filteredNode)}" update="@form">
 				</p:commandButton>
 			</f:facet>
 		</p:treeTable>
