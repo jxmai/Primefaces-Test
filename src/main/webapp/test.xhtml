@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-    <h:head>   
-        <title>PrimeFaces Test</title>
-    </h:head>
-    <h:body>
-        
-        <h1>#{testView.testString}</h1>
-        
-    </h:body>
+<h:head>
+	<title>PrimeFaces Test</title>
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:tabView>
+			<p:tab title="tab1">
+				<p:textEditor value="#{testView.test}"></p:textEditor>
+			</p:tab>
+			<p:tab title="tab2">
+				<p:textEditor value="#{testView.test2}"></p:textEditor>
+			</p:tab>
+			<p:tab title="tab2">
+				<p:inputText value="#{testView.test3}"></p:inputText>
+			</p:tab>
+		</p:tabView>
+
+		<p:commandButton value="Test"
+			actionListener="#{testView.testCommandButton()}" process="@form"></p:commandButton>
+	</h:form>
+
+</h:body>
 </html>
