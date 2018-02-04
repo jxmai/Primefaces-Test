@@ -9,8 +9,6 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.omnifaces.util.Ajax;
-
 //@ManagedBean(name = "testView")
 //@ViewScoped
 @ViewScoped
@@ -44,12 +42,12 @@ public class TestView implements Serializable {
 	applicationSocket.turnOnEditMode();
 
     }
-    
+
     public void cancelButtonAction() {
 	FacesContext context = FacesContext.getCurrentInstance();
 
 	context.addMessage(null, new FacesMessage("Successful", "Edit mode is off"));
-	
+
 	this.info.setReadOnly(true);
 	applicationSocket.turnOffEditMode();
     }
@@ -70,10 +68,10 @@ public class TestView implements Serializable {
     }
 
     public ApplicationSocket getApplicationSocket() {
-        return applicationSocket;
+	return applicationSocket;
     }
 
     public void setApplicationSocket(ApplicationSocket applicationSocket) {
-        this.applicationSocket = applicationSocket;
+	this.applicationSocket = applicationSocket;
     }
 }
