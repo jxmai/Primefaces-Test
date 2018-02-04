@@ -11,7 +11,6 @@
 	<title>PrimeFaces Test</title>
 </h:head>
 <h:body>
-	<!-- https://stackoverflow.com/questions/3787514/how-can-server-push-asynchronous-changes-to-a-html-page-created-by-jsf -->
 	<h:form id="form">
 		<p:growl id="growl" showDetail="true" sticky="true" />  
 		<p:panel header="Form" id="panel">
@@ -45,8 +44,6 @@
 							icon="fa fa-times">
 			
 			</p:commandButton>
-			
-        	<p:commandButton actionListener="#{applicationSocket.turnOnEditMode()}" update="@form"></p:commandButton>
 		</p:panel>
 	
 		<o:socket channel="secondChannel"
@@ -55,38 +52,11 @@
 			<f:ajax event="updateNotifications" render=":form" listener="#{testView.onEdit()}" />
 		</o:socket>
 		
-		<!-- <o:commandScript name="pushCommandScript" render="panel"></o:commandScript> -->
-			<!-- onmessage="function(m){console.log(m);}" --> 
-	<p:remoteCommand name="rc" actionListener="#{testView.onEdit()}" update="@form" oncomplete="PF('edit').disable()"></p:remoteCommand>
+	<!-- <p:remoteCommand name="rc" actionListener="#{testView.onEdit()}" update="@form" oncomplete="PF('edit').disable()"></p:remoteCommand> -->
 	
 	</h:form>
 	<h:form>
 	    <o:commandScript name="triggerCommandScript" action="#{testView.onEdit()}" render=":form" />
 	</h:form>
-	<!-- <o:socket onmessage="asyncListener" channel="async" scope="view" connected="false"></o:socket> -->
-	
-	<script>
-		function onMessage(msg) {
-			console.log(msg);
-			//alert(msg);
-			// rc();
-		}
-		
-		function start() {
-			console.log("start");
-			OmniFaces.Push.open("async");
-		}
-
-		function pushSecondChannel() {
-			console.log("second channel");
-			OmniFaces.Push.open("secondChannel");
-		}
-
-		function asyncListener(result) {
-		    OmniFaces.Push.close("async");
-		    console.log(result); // Do your thing with HTML DOM.
-		    PF("asyncCommand").enable();
-		}
-	</script>
 </h:body>
 </html>
