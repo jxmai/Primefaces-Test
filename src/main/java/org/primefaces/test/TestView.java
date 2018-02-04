@@ -6,7 +6,10 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.omnifaces.util.Ajax;
 
 //@ManagedBean(name = "testView")
 //@ViewScoped
@@ -14,41 +17,63 @@ import javax.inject.Named;
 @Named
 public class TestView implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4124891683211838799L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 4124891683211838799L;
 
-	private Info info = new Info();
+    @Inject
+    private ApplicationSocket applicationSocket;
 
-	@PostConstruct
-	public void init() {
-		info.setName("Jane Smith");
+    private Info info = new Info();
 
-		info.setDescription("Test");
-	}
+    @PostConstruct
+    public void init() {
+	info.setName("Jane Smith");
 
-	public void editButtonAction() {
-		FacesContext context = FacesContext.getCurrentInstance();
+	info.setDescription("Test");
+    }
 
-		context.addMessage(null, new FacesMessage("Successful", "Edit mode is on"));
+    public void editButtonAction() {
+	FacesContext context = FacesContext.getCurrentInstance();
 
-		System.out.println("Edit button action");
-		this.info.setReadOnly(false);
-	}
+	context.addMessage(null, new FacesMessage("Successful", "Edit mode is on"));
+
+	System.out.println("Edit button action");
+	this.info.setReadOnly(false);
+	applicationSocket.turnOnEditMode();
+
+    }
+    
+    public void cancelButtonAction() {
+	FacesContext context = FacesContext.getCurrentInstance();
+
+	context.addMessage(null, new FacesMessage("Successful", "Edit mode is off"));
 	
-	public void onEdit() {
-		FacesContext context = FacesContext.getCurrentInstance();
+	this.info.setReadOnly(true);
+	applicationSocket.turnOffEditMode();
+    }
 
-		context.addMessage(null, new FacesMessage("Successful", "Editing"));
+    public void onEdit() {
+	FacesContext context = FacesContext.getCurrentInstance();
 
-	}
+	context.addMessage(null, new FacesMessage("Successful", "Editing"));
 
-	public Info getInfo() {
-		return info;
-	}
+    }
 
-	public void setInfo(Info info) {
-		this.info = info;
-	}
+    public Info getInfo() {
+	return info;
+    }
+
+    public void setInfo(Info info) {
+	this.info = info;
+    }
+
+    public ApplicationSocket getApplicationSocket() {
+        return applicationSocket;
+    }
+
+    public void setApplicationSocket(ApplicationSocket applicationSocket) {
+        this.applicationSocket = applicationSocket;
+    }
 }

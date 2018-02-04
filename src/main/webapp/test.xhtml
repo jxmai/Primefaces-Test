@@ -11,8 +11,8 @@
 	<title>PrimeFaces Test</title>
 </h:head>
 <h:body>
-
-	<h:form>
+	<!-- https://stackoverflow.com/questions/3787514/how-can-server-push-asynchronous-changes-to-a-html-page-created-by-jsf -->
+	<h:form id="form">
 		<p:growl id="growl" showDetail="true" sticky="true" />  
 		<p:panel header="Form" id="panel">
 			<h:panelGrid columns="2" cellpadding="10">
@@ -20,60 +20,56 @@
 				
 				<p:inputText value="#{testView.info.name}" readonly="#{applicationSocket.readOnly}"></p:inputText>
 				
-				<!-- readonly="#{testView.info.readOnly}" -->
-				
 				<h:outputText value="Description" />
 				
 				<p:inputTextarea value="#{testView.info.description}" readonly="#{applicationSocket.readOnly}"></p:inputTextarea>
 				
-				<!-- readonly="#{testView.info.readOnly}" -->
-			</h:panelGrid>
+			</h:panelGrid> 
 			
 			<p:commandButton value="Edit" 
+							widgetVar="edit"
 							icon="fa fa-edit" 
 							update="@form"
-							rendered="#{testView.info.readOnly}"
+							rendered="#{applicationSocket.readOnly}"
 							actionListener="#{testView.editButtonAction()}">
 							
 			</p:commandButton>
 			
 			<p:commandButton widgetVar="save" value="Save" icon="fa fa-save" rendered="#{!applicationSocket.readOnly}"></p:commandButton>
 			
-			<!-- rendered="#{!testView.info.readOnly}" -->
-			
-			<p:commandButton widgetVar="cancel" value="Cancel" rendered="#{!applicationSocket.readOnly}" icon="fa fa-times">
-			
-			<!-- rendered="#{!testView.info.readOnly}" -->
+			<p:commandButton widgetVar="cancel" 
+							value="Cancel" 
+							rendered="#{!applicationSocket.readOnly}" 
+							actionListener="#{testView.cancelButtonAction()}"
+							update="@form"
+							icon="fa fa-times">
 			
 			</p:commandButton>
 			
-			<!-- <p:commandButton widgetVar="asyncCommand" value="submit"
-        		action="#{someTaskBacking.start}" onclick="start()" /> -->
-        		
         	<p:commandButton actionListener="#{applicationSocket.turnOnEditMode()}" update="@form"></p:commandButton>
 		</p:panel>
 	
-		<!-- <o:socket onmessage="commandScriptName" channel="secondChannel" ></o:socket>
-		<o:commandScript name="commandScriptName" actionListener="" render="@form" /> -->
-		
 		<o:socket channel="secondChannel"
-				onmessage="onMessage"
+				onmessage="triggerCommandScript"
 			>
+			<f:ajax event="updateNotifications" render=":form" listener="#{testView.onEdit()}" />
 		</o:socket>
 		
-		<o:commandScript name="pushCommandScript" render="panel"></o:commandScript>
+		<!-- <o:commandScript name="pushCommandScript" render="panel"></o:commandScript> -->
 			<!-- onmessage="function(m){console.log(m);}" --> 
-	<p:remoteCommand name="rc" actionListener="#{testView.onEdit()}" update="@form"></p:remoteCommand>
+	<p:remoteCommand name="rc" actionListener="#{testView.onEdit()}" update="@form" oncomplete="PF('edit').disable()"></p:remoteCommand>
+	
 	</h:form>
-	
-	<o:socket onmessage="asyncListener" channel="async" scope="view" connected="false"></o:socket>
-	
+	<h:form>
+	    <o:commandScript name="triggerCommandScript" action="#{testView.onEdit()}" render=":form" />
+	</h:form>
+	<!-- <o:socket onmessage="asyncListener" channel="async" scope="view" connected="false"></o:socket> -->
 	
 	<script>
 		function onMessage(msg) {
 			console.log(msg);
 			//alert(msg);
-			rc();
+			// rc();
 		}
 		
 		function start() {

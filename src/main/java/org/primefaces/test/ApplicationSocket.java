@@ -2,7 +2,7 @@ package org.primefaces.test;
 
 import java.io.Serializable;
 
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -11,7 +11,7 @@ import org.omnifaces.cdi.PushContext;
 
 @Named
 //@ApplicationScoped
-@ViewScoped
+@ApplicationScoped
 public class ApplicationSocket implements Serializable {
 
 	/**
@@ -27,7 +27,13 @@ public class ApplicationSocket implements Serializable {
 
 	public void turnOnEditMode() {
 		readOnly = false;
-		socket.send(readOnly);
+//		socket.send(readOnly);
+		socket.send("updateNotifications");
+	}
+	
+	public void turnOffEditMode() {
+	    readOnly = true;
+	    socket.send("updateNotifications");
 	}
 
 	public void sendMessage(Object message) {
