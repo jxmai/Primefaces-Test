@@ -1,19 +1,41 @@
 package org.primefaces.test;
 
 import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.event.FileUploadEvent;
 
 @ManagedBean(name = "testView")
 @ViewScoped
 public class TestView implements Serializable {
-    
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 7705670082140081684L;
+
     private String testString;
-    
-    @PostConstruct  
+
+    private String fakeHash = "abcde";
+
+    @PostConstruct
     public void init() {
         testString = "Welcome to PrimeFaces!!!";
+    }
+
+    public void uploadListener(FileUploadEvent event) {
+        FacesMessage msg = new FacesMessage("Succesful",
+                event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        // skip some steps, just assume we have the hash back
+
+        testString = testString.concat(fakeHash);
     }
 
     public String getTestString() {
@@ -22,5 +44,9 @@ public class TestView implements Serializable {
 
     public void setTestString(String testString) {
         this.testString = testString;
-    }    
+    }
+
+    public String getFakeHash() {
+        return fakeHash;
+    }
 }

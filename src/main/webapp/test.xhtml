@@ -3,14 +3,25 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
       xmlns:h="http://java.sun.com/jsf/html">
 
     <h:head>   
         <title>PrimeFaces Test</title>
     </h:head>
     <h:body>
-        
-        <h1>#{testView.testString}</h1>
-        
+        <h:form>
+	        <h1>#{testView.testString}</h1>
+	        <pe:ckEditor id="editor"
+					 value="#{testView.testString}"/>
+					 
+			<p:fileUpload id="upload" 
+		               fileUploadListener="#{testView.uploadListener}"
+		               label="Insert image"
+		               mode="advanced"
+		               allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+		               update="editor">
+		 	 </p:fileUpload>
+        </h:form>
     </h:body>
 </html>
