@@ -12,16 +12,20 @@
     <h:body>
         <h:form>
 	        <h1>#{testView.testString}</h1>
-	        <pe:ckEditor id="editor"
-					 value="#{testView.testString}"/>
-					 
-			<p:fileUpload id="upload" 
-		               fileUploadListener="#{testView.uploadListener}"
-		               label="Insert image"
-		               mode="advanced"
-		               allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-		               update="editor">
-		 	 </p:fileUpload>
+	        <p:outputPanel>
+		        <pe:ckEditor id="editor"
+						 value="#{testView.testString}">
+					<p:ajax event="blur" update="@this"></p:ajax>
+				</pe:ckEditor>
+						 
+				<p:fileUpload id="upload" 
+			               fileUploadListener="#{testView.uploadListener}"
+			               label="Insert image"
+			               mode="advanced"
+			               allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
+			 	 </p:fileUpload>
+		 		 <p:autoUpdate/>
+		 	 </p:outputPanel>
         </h:form>
     </h:body>
 </html>
